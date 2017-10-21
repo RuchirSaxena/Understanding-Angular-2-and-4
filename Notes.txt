@@ -1,0 +1,165 @@
+
+NPM Commands
+=================
+
+npm install -g @angular/cli  =>Install Angular CLI globally
+ng --version => For checking the installed CLI Version
+ng new hello-world => For Creating new Project ie.hello-world
+ng serve => To run the server that will start live server to run our angular application => This will create localhost:4200 and we can run our application in browser
+
+Folder Structure
+===================
+1.e2e =>It stands for End to End (Used for testing) , We use this folder files to test our application , basically automated test that dipicts a real user , So we can write code to launch our browser , click links , and other tests
+
+2.node_modules =>It stores all the thrid party library on which our project depends upon , it is Used only in the development time and parts of this part of this folder are used while deploying our application
+
+3.src =>It contains the actual source code of our project , it contains module and componets , so every application contains atleat one module or folder
+
+4.assests => Images , icons etc.
+
+5.enviroments =>It has one file for production enviroment and the other for the development enviroment
+
+6.index.html =>its a simple HTML file that contails our angular application 
+            Note: We dont have any references to script and css links , these references are dynamically inserted in this file
+
+7.main.ts =>its a starting point of our application , its basically the main methood(similar to C#) ie. our start code file  , so in this file we are bootsraping the main module of our application ie.platformBrowserDynamic().bootstrapModule(AppModule)
+
+8.polyfills.ts => This file includes polyfills(scripts) that are needed by Angular as angular contains some features of javascript that are not implemented in all the browser (converting some features of javscript that are not available in all the browser but are neede by angular js)
+
+9.test.ts => For setting the testing enviroment for our angular app
+
+10..editorconfig => Used for same settings if all the many developers are working on same project
+
+11.protractor.config.js =>For test settings
+
+12.tslint.json => For giving suggestions for our typescript code , balically similar to jslint
+          
+
+
+***********************Angular Fundamentals *********************
+
+Components
+============
+At the heart of angular app we have one or more Components infact it is mandatory to have 1 component in angular app
+
+What are Components?
+Ans. A component is made up of 3 things :
+1.Data 
+2.HTML Template
+3.Logic
+
+Angular focuses on Component Model which are small parts of an application which can be re-used in same application or different applications as well.
+
+A real world angular app is a tree of components strating from root component(App component) and other child components.
+
+Modules
+=========
+1.A module is a container of group of related components
+
+Eg:Courses Module , Admin Module 
+
+Steps for Creating a Component
+==============================
+1.Create a Component.
+import {Component} from '@angular/core'
+
+//Decorator function =>Adding one or more property for defining which part of angular component we want to use in our CoursesComponent
+@Component({
+    selector:'courses', //<courses> "courses" , <div class="courses"></div> ".courses" ,<div id="courses"></div> "#courses"
+    
+    //The rendered HTMl we want
+    template:'<h2>Courses</h2>'
+})
+export class CoursesComponent{
+
+}
+
+2.Register in a module.
+import {CoursesComponent} from "./courses.component"
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CoursesComponent
+
+  ],
+3.Add an element in an HTML markup
+In Html file
+<h1>Basic Angular Component</h1>
+<courses></courses> =>Name of selector
+
+Short Hand for above spteps
+============================
+In the terminal window use below Command =>
+
+ng g c course => This Command will create below files automatically
+
+  create src/app/admin/admin.component.html (24 bytes)
+  create src/app/admin/admin.component.spec.ts (621 bytes)
+  create src/app/admin/admin.component.ts (265 bytes)
+  create src/app/admin/admin.component.css (0 bytes)
+  update src/app/app.module.ts (468 bytes)
+
+
+Data Binding in angular
+============================
+So , basically we have a template property in @component and we have a ts class so properties defined in the ts class can be be accessed in the Template property using {{}} and any change in the property defined in in the ts class will result change in the value of this property binded inside the Template  
+
+Eg:
+@Component({
+    selector:'courses', //<courses> "courses" , <div class="courses"></div> ".courses" ,<div id="courses"></div> "#courses"
+    
+    //The rendered HTMl we want
+    template:'<h2>{{title}}</h2>'
+})
+export class CoursesComponent{
+    title ="List of Courses"
+} 
+
+change in the title will automatically reflected in the tempate property
+
+
+Services 
+==============
+When we want to re-use some logic of our application in multiple places , then we should create a service , its a plain TS class with no decorators
+
+Benefits :
+1.Re-use of the logic.
+2.SOC(Seperation of concern) is acheived.
+3.Easy to unit test application.
+4.When we Register a Dependency in a providers , then only a single instance of that class for that entire module 
+Eg: 1 service will be used by 10 modules but only single intance of that service is created in our application (Also called as sigleton pattern)
+
+Steps for Creating Service
+=============================
+1.Create a TS Class =>CoursesService
+
+//There is no decorator for service ts class in angular js
+export class CoursesService{
+    getCourses(){
+        return  [".NET Courses", "Angular JS", "React JS"];
+    }
+}
+
+2.Use service in our Component Class constructor
+
+constructor(){
+        let service=new CoursesService;
+        this.courses=service.getCourses();
+    }
+
+But above code is tightly coupled , we should use Dependency Injection concept to achive Decoupling
+
+a=> Passing the Service through the constructor
+
+  constructor(service:CoursesService){
+       // let service=new CoursesService; //Tightly coupled by using new operator
+        this.courses=service.getCourses();
+    }
+
+b=>Register the dependent service in the app.module inside providers property that takes array of arguments
+
+ providers: [
+    //Implemting DI 
+    CoursesService
+  ]
