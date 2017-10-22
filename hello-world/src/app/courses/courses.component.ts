@@ -15,18 +15,21 @@ import {Component} from '@angular/core'
              {{course}}
         </li>
     </ul>
-    <input type="button" value="click me"/>
+  
     <table>
         <tr>
             <td [attr.colspan]="colSpan"></td>
         </tr>
     </table>
+    <input class="btn btn-primary" [class.active]="isActive" type="button" value="click me"/> <br/>
+    <input type="button" [style.background-color]="isActive ? 'blue': 'green'"  value="Attribute Binding" />
     `
 })
 export class CoursesComponent {
     title = "List of Courses1"
     courses;
     colSpan=2;
+    isActive=false;
 
     constructor(service:CoursesService){
        // let service=new CoursesService; //Tightly coupled by using new operator

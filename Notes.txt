@@ -186,4 +186,48 @@ Eg:
   <img [src]="data" />
 Note : Property Binding is one way compared to String Interpolation which is 2 way  
 
+
+Adding Bootstrap library to Project
+====================================
+1.Add Bootstrap library to project using below Command.
+npm install bootstrap --save 
+It will be added under node_modules folder inside bootstrap folder
+
+2.Import it to style.css file inside src folder using below code
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+Class Binding
+==================
+We can dynamically add and remove class from our HTML element by using Class Binding mechanism of Angular JS
+
+Eg:
+<input class="btn btn-primary" [class.active]="isActive" type="button" value="click me"/>
+
+export class CoursesComponent {
+    title = "List of Courses1"
+    courses;
+    colSpan=2;
+    isActive=false;
+
+}
+
+when isActive = true then active class will be added to the Button and vice versa 
+
+ie: isActive=true =>then
+<input class="btn btn-primary active" type="button" value="click me">
+
+Otherwise
+
+isActive=false =>then
+<input class="btn btn-primary" type="button" value="click me">
+
+
+Style Binding
+==================
+Its similar to class binding , the code is below
+Eg:
+   <input type="button" [style.background-color]="isActive ? 'blue': 'green'"  value="Attribute Binding" />
+
  Continue with section 4..... 
