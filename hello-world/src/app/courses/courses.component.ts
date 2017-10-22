@@ -9,16 +9,24 @@ import {Component} from '@angular/core'
     //The rendered HTMl we want
     template: `
     <h2>{{ "Title:"+getTitle() }}</h2>
+    <h2 [textContent]="title"></h2>
     <ul>
         <li *ngFor="let course of courses">
              {{course}}
         </li>
     </ul>
+    <input type="button" value="click me"/>
+    <table>
+        <tr>
+            <td [attr.colspan]="colSpan"></td>
+        </tr>
+    </table>
     `
 })
 export class CoursesComponent {
-    title = "List of Courses"
+    title = "List of Courses1"
     courses;
+    colSpan=2;
 
     constructor(service:CoursesService){
        // let service=new CoursesService; //Tightly coupled by using new operator

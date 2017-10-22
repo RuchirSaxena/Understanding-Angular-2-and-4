@@ -88,7 +88,7 @@ In Html file
 <h1>Basic Angular Component</h1>
 <courses></courses> =>Name of selector
 
-Short Hand for above spteps
+CLI Command for above steps
 ============================
 In the terminal window use below Command =>
 
@@ -163,3 +163,27 @@ b=>Register the dependent service in the app.module inside providers property th
     //Implemting DI 
     CoursesService
   ]
+
+CLI Command for Creating Service
+
+ng g s email  => Will create below files
+
+ create src/app/email.service.spec.ts (368 bytes)
+  create src/app/email.service.ts (111 bytes)
+
+Ways of binding properties of component TS class property to Template
+==============================================================
+1. String Interpolation => TWo way binding , ie change in the TS Class will be refelected in the DOM but not vice versa and dom updation will happen.
+Eg:
+
+ <h2>{{ title }}</h2>
+
+
+2. Property Binding =>
+Eg:
+  <h2 [textContent]="title"></h2>
+
+  <img [src]="data" />
+Note : Property Binding is one way compared to String Interpolation which is 2 way  
+
+ Continue with section 4..... 
