@@ -1,5 +1,7 @@
+import { EmailService } from './../email.service';
 import { CoursesService } from './../courses.service';
 import {Component} from '@angular/core'
+
 
 // Decorator function =>Adding one or more property for defining which part of
 // angular component we want to use in our CoursesComponent
@@ -29,6 +31,12 @@ import {Component} from '@angular/core'
     <button (click)="onSave($event)">Button Click Event</button>
     <p>Handling key press events in angular</p>
     <input #email type="text" (keyup.enter)="onKeyUp(email.value)" />
+    <br>
+    <p>2 way binding</p>
+    <input  type="text" [value]="userName" (keyup.enter)="userName=$event.target.value; onKeyUp2WayBinding()" />
+
+    <p>2 way binding =>Better way</p>
+    <input [(ngModel)]="userName" (keyup.enter)="onKeyUp2WayBinding()" />
 
     `
 })
@@ -37,6 +45,7 @@ export class CoursesComponent {
     courses;
     colSpan=2;
     isActive=false;
+    userName="Ruchir Saxena";
 
     constructor(service:CoursesService){
        // let service=new CoursesService; //Tightly coupled by using new operator
@@ -56,5 +65,9 @@ export class CoursesComponent {
         console.log("Enter was pressed");
         console.log("Value ="+email);
 
+    }
+    //Binding 2 way
+    onKeyUp2WayBinding(){
+        console.log(this.userName);
     }
 }

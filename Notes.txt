@@ -261,7 +261,8 @@ Note : To stop event bublling a concept related to javascript we can use $event.
  Template Variables
  ==================
  They are used to get the value of control 
- eg: to get the value of textbox , they are created using #name
+ eg: to get the value of textbox , they are created using #name 
+ Note: Used in one way binding only
 
   <input #email type="text" (keyup.enter)="onKeyUp(email.value)" />   
 
@@ -273,5 +274,38 @@ Note : To stop event bublling a concept related to javascript we can use $event.
 
     }
 
+    oR 
+Two Way Binding
+==================    
+    Above code is only one way binding
+    Better way of implementing it Using 2 way binding of angualr through property binding and $event
+
+Eg: 
+     <input  type="text" [value]="userName" (keyup.enter)="userName=$event.target.value; onKeyUp2WayBinding()" />
+
+            OR Using NgModule
+     <p>2 way binding =>Better way</p>
+    <input [(ngModel)]="userName" (keyup.enter)="onKeyUp2WayBinding()" /> 
+    Note : For above code to work we need to import the 
+    FormsModule in our app.modules.ts 
+
+    import {FormsModule} from '@angular/forms';
+
+     imports: [
+    BrowserModule,
+    FormsModule
+    ]
+
+
+export class CoursesComponent {
+    userName="Ruchir Saxena";
+
+    //Binding 2 way
+    onKeyUp2WayBinding(){
+        console.log(this.userName);
+    }
+
 }
+
+
  Continue with section 4..... 
