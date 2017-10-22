@@ -256,6 +256,22 @@ Note : To stop event bublling a concept related to javascript we can use $event.
         console.log("Enter was pressed");
     }
 
+}
+
+ Template Variables
+ ==================
+ They are used to get the value of control 
+ eg: to get the value of textbox , they are created using #name
+
+  <input #email type="text" (keyup.enter)="onKeyUp(email.value)" />   
+
+ export class CoursesComponent {
+    //Binding KeyUp event 
+    onKeyUp(email){
+        console.log("Enter was pressed");
+        console.log("Value ="+email);
+
     }
 
+}
  Continue with section 4..... 

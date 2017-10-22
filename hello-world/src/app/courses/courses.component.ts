@@ -28,7 +28,7 @@ import {Component} from '@angular/core'
   
     <button (click)="onSave($event)">Button Click Event</button>
     <p>Handling key press events in angular</p>
-    <input type="text" (keyup.enter)="onKeyUp()" />
+    <input #email type="text" (keyup.enter)="onKeyUp(email.value)" />
 
     `
 })
@@ -52,7 +52,9 @@ export class CoursesComponent {
         console.log($event);
     }
     //Binding KeyUp event 
-    onKeyUp(){
+    onKeyUp(email){
         console.log("Enter was pressed");
+        console.log("Value ="+email);
+
     }
 }
