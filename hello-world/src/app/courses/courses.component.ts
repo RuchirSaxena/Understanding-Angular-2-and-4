@@ -25,7 +25,11 @@ import {Component} from '@angular/core'
     <br/>
     <input type="button" class="btn btn-info" [style.background-color]="isActive ? 'blue': 'green'"  value="Attribute Binding" />
     <br/>
+  
     <button (click)="onSave($event)">Button Click Event</button>
+    <p>Handling key press events in angular</p>
+    <input type="text" (keyup.enter)="onKeyUp()" />
+
     `
 })
 export class CoursesComponent {
@@ -46,5 +50,9 @@ export class CoursesComponent {
     onSave($event){
         console.log("Button was clicked");
         console.log($event);
+    }
+    //Binding KeyUp event 
+    onKeyUp(){
+        console.log("Enter was pressed");
     }
 }

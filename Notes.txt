@@ -244,5 +244,18 @@ Event Binding
 }
 
 $event is used to get the event properties
+Note : To stop event bublling a concept related to javascript we can use $event.stopPropagation();
+
+ Handling key press events in angular in a better way compared to javascript
+ =================================================================
+    <input type="text" (keyup.enter)="onKeyUp()" />
+
+    export class CoursesComponent {
+    //Binding KeyUp event 
+    onKeyUp(){
+        console.log("Enter was pressed");
+    }
+
+    }
 
  Continue with section 4..... 
