@@ -230,4 +230,19 @@ Its similar to class binding , the code is below
 Eg:
    <input type="button" [style.background-color]="isActive ? 'blue': 'green'"  value="Attribute Binding" />
 
+Event Binding
+=================
+<button (click)="onSave($event)">Button Click Event</button>
+
+ class CoursesComponent {
+  
+    //Binding to click event of button
+    onSave($event){
+        console.log("Button was clicked");
+        console.log($event);
+    }
+}
+
+$event is used to get the event properties
+
  Continue with section 4..... 

@@ -21,8 +21,11 @@ import {Component} from '@angular/core'
             <td [attr.colspan]="colSpan"></td>
         </tr>
     </table>
-    <input class="btn btn-primary" [class.active]="isActive" type="button" value="click me"/> <br/>
-    <input type="button" [style.background-color]="isActive ? 'blue': 'green'"  value="Attribute Binding" />
+    <input class="btn btn-primary" [class.active]="isActive" type="button" value="Class Binding"/> 
+    <br/>
+    <input type="button" class="btn btn-info" [style.background-color]="isActive ? 'blue': 'green'"  value="Attribute Binding" />
+    <br/>
+    <button (click)="onSave($event)">Button Click Event</button>
     `
 })
 export class CoursesComponent {
@@ -38,5 +41,10 @@ export class CoursesComponent {
     //To get the course title
     getTitle() {
         return this.title;
+    }
+    //Binding to click event of button
+    onSave($event){
+        console.log("Button was clicked");
+        console.log($event);
     }
 }
