@@ -353,5 +353,72 @@ Step2:Register it in module
 Step3: Use Custom Pipe inside Component Template  
 
  {{ data | summary:20 }}
- 
+
+Reusable Components In Angular
+================================
+We can make componets reusable where a component can accept the property when they are defined
+
+Step 1:Using Input module of angualr/core
+
+import { Component,OnInit ,Input } from '@angular/core';
+
+@Component({
+    selector:'favorite',
+    templateUrl:'./favorite.component.html',
+    styleUrls:['./favorite.component.css']
+})
+export class FavoriteComponent implements OnInit{
+  //  @Input() isFavorite: boolean;
+    //we can also define alias for our input property
+    @Input('Fav') isFavorite: boolean;
+
+    //Benefit of using alias is that if the isFavorite varible is changed to some other name like isSelected , then our functionality will be broken where this reusable component is using isFavorite varible ie.app.component.html, so alway use alias 
+    //Note : But we have to manually update our favorite.component.html if the variable name is changed 
+    ngOnInit(): void {
+       // throw new Error("Method not implemented.");
+    }
+
+    constructor(){
+
+    }
+
+    onClick(){
+        this.isFavorite=!this.isFavorite;
+    }
+   
+}
+
+OR 
+
+Without Using Input module of angualr/core
+import { Component,OnInit } from '@angular/core';
+
+@Component({
+    selector:'favorite',
+    templateUrl:'./favorite.component.html',
+    styleUrls:['./favorite.component.css'],
+    inputs:['isFavorite']
+})
+export class FavoriteComponent implements OnInit{
+    isFavorite: boolean;
+    ngOnInit(): void {
+        throw new Error("Method not implemented.");
+    }
+
+    constructor(){
+
+    }
+
+    onclick(){
+        this.isFavorite=!this.isFavorite;
+    }
+   
+}
+
+Note: First Approch is better as it will not be affected by a change in the Variable name ie:  inputs:['isFavorite'] , it magically defines the isFavorite inside TS Component class and any other Variable defined with the same name will brake our functionality inside our template markup
+
+Step 2: Inside app.component.html
+
+<favorite [isFavorite]="post.isFavorite"></favorite>
+
  Continue with section 5..... 

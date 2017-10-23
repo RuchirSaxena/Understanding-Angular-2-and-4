@@ -1,0 +1,8 @@
+<h2> Reusable Components In Angular JS </h2>
+
+<span
+ class="glyphicon"
+ [class.glyphicon-star]="isFavorite"
+ [class.glyphicon-star-empty]="!isFavorite"  
+ (click)="onClick()"
+></span>

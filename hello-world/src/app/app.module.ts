@@ -1,3 +1,4 @@
+import { FavoriteComponent } from './ReusableComponent/favorite.component';
 import { SummaryPipe } from './summary.pipe';
 import { CoursesService } from './courses.service';
 import {CoursesComponent} from "./courses/courses.component"
@@ -13,6 +14,7 @@ import { AdminComponent } from './admin/admin.component';
     AppComponent,
     CoursesComponent,
     AdminComponent,
+    FavoriteComponent,
     SummaryPipe
 
   ],
