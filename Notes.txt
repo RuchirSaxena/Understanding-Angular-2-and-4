@@ -307,5 +307,51 @@ export class CoursesComponent {
 
 }
 
+Pipes (Filters of Angular 1)
+================================
 
- Continue with section 4..... 
+Synatx :
+ <h2>Pipes aka Filters</h2>
+    {{ course.title | uppercase}} <br/>
+    {{ course.rating | number:'1.2-2' }} <br/>
+    {{ course.students | number }} <br/>
+    {{ course.price | currency:'AUD'}} <br/>
+    {{ course.releaseDate | date:'shortDate' }} <br/>
+
+
+
+Custom Pipes
+==============
+
+Syntax :
+Step1:
+import { Pipe,PipeTransform} from '@angular/core';
+
+@Pipe({
+    name:'summary'
+})
+export class SummaryPipe implements PipeTransform{
+    /*transform is a method defined inside PipeTransform Interface 
+    first param : Value takes the element value on which the param is applied 
+    Second param can take any no of arguments which can be further used to wirte our business logic
+    */
+    transform(value: string,limit?:number){
+        if(!value)
+            return null;
+        let actualLimit=(limit)?limit : 50;
+       return  value.substring(0,actualLimit)+'...';
+    }
+}
+
+Step2:Register it in module
+
+@NgModule({
+  declarations: [
+    SummaryPipe
+  ]
+
+Step3: Use Custom Pipe inside Component Template  
+
+ {{ data | summary:20 }}
+ 
+ Continue with section 5..... 

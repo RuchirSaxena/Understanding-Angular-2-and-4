@@ -37,6 +37,16 @@ import {Component} from '@angular/core'
 
     <p>2 way binding =>Better way</p>
     <input [(ngModel)]="userName" (keyup.enter)="onKeyUp2WayBinding()" />
+    <h2>Pipes aka Filters</h2>
+    {{ course.title | uppercase}} <br/>
+    {{ course.rating | number:'1.2-2' }} <br/>
+    {{ course.students | number }} <br/>
+    {{ course.price | currency:'AUD'}} <br/>
+    {{ course.releaseDate | date:'shortDate' }} <br/>
+
+    <h2>Custom Pipes</h2>
+
+    {{ data | summary:20 }}
 
     `
 })
@@ -46,6 +56,15 @@ export class CoursesComponent {
     colSpan=2;
     isActive=false;
     userName="Ruchir Saxena";
+    data='Lorem test Lorem test Lorem test Lorem test Lorem test Lorem test Lorem test Lorem test Lorem test Lorem test Lorem test Lorem test'
+
+    course={
+        title:"Complete Angualr Course",
+        rating: 4.7884,
+        students:30123,
+        price:190.98,
+        releaseDate:new Date(2016,3,4)
+    };
 
     constructor(service:CoursesService){
        // let service=new CoursesService; //Tightly coupled by using new operator
