@@ -1,5 +1,13 @@
-<h1>Basic Angular Component</h1>
+<h1>Basic Angular Component related functionalities</h1>
 
-<courses></courses>
+<div class="container">
+  <div class="col-md-6">
+    <courses></courses>
+  </div>
+  <div class="col-md-6">
+    <favorite [Fav]="post.isFavorite" (change)="onFavoriteChanged($event)"></favorite>
+  </div>
 
-<favorite [Fav]="post.isFavorite"></favorite>
+
+
+</div>
