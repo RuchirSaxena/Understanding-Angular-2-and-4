@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SampledirectiveComponent  {
    courses=[];
-
+   viewMode:string='map';
    coursesCount():boolean{
       if(this.courses.length>0){
         return true;

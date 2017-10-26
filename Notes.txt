@@ -498,7 +498,7 @@ export class AppComponent {
 So basically when we are delaing with events in case of Reusable Components then we can conceptulise this co
 
 Applying CSS to our component
-=================================
+===========================================================================
 
 @Component({
     selector:'favorite',
@@ -583,7 +583,7 @@ In app.component.html =>
 
 
 Directives
-==============
+===========================================================================
 Directives are used to modify the content of our DOM , there are 2 types of Directives in angular
 
 1.Structural =>Modify Structure of DOM
