@@ -1,0 +1,35 @@
+<!--
+  Angular 2 way
+-->
+<div *ngIf="coursesCount()">
+  <h1>List of courses</h1>
+</div>
+
+<div *ngIf="courses.length==0">
+
+  <h2>No courses</h2>
+</div>
+
+<!--
+  Angular 4 way
+-->
+<div *ngIf="coursesCount(); else noCourses">
+
+  <h2>List of courses</h2>
+</div>
+<ng-template #noCourses>
+
+  <h1>No courses</h1>
+</ng-template>
+<!--
+  Another way in Angular 4 of writing the same code
+-->
+<div *ngIf="coursesCount(); then coursesList else noCoursesPresent"></div>
+<!--1st Template-->
+<ng-template #coursesList>
+  <h2>List of courses</h2>
+</ng-template>
+<!--2st Template-->
+<ng-template #noCoursesPresent>
+  <h1>No courses</h1>
+</ng-template>

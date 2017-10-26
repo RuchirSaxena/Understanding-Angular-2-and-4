@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { PanelComponent } from './panel/panel.component';
+import { SampledirectiveComponent } from './sampledirective/sampledirective.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PanelComponent } from './panel/panel.component';
     AdminComponent,
     FavoriteComponent,
     SummaryPipe,
-    PanelComponent
+    PanelComponent,
+    SampledirectiveComponent
 
   ],
   imports: [
