@@ -537,23 +537,37 @@ In component.html
 
 })
 
-ng-content
-=============
+ng-content & ng-container
+=========================
 ng-content is used to provide dynamic data that can come from our app componets , so bacically there are different ways to bind our dynamoc data to reusable component 
 1.Property binding
 2.ng-content 
 
+ng-container removes the extra div we used in our app.component , to make our HTML more cleaner , its replaces the entire ng-container tag with the dynamic data
+
 We should use ng-content where our reusable component does not have and data coming from its TS class and is mainly used for Design repetation in our main component , below is the example of that .....
 
 In our component.html ie bootstrap-panel
-<div class="panel panel-default">
-  <div class="panel-heading">
-   <ng-content select=".heading"></ng-content>
-  </div>
-  <div class="panel-body">
-      <ng-content select=".body"></ng-content>
-  </div>
-</div>
+<!--  <bootstrap-panel>
+      <div class="heading">
+        Heading dynamic
+      </div>
+      <div class="body">
+        body dynamic
+      </div>
+    </bootstrap-panel> 
+  
+  Below is a better way of writing this code
+  -->
+
+    <bootstrap-panel>
+        <ng-container class="heading">
+          Heading dynamic
+        </ng-container >
+        <ng-container  class="body">
+          body dynamic
+        </ng-container >
+      </bootstrap-panel>
 
 Note : Here we are using select Attribute to differenciate between 2 ng-componet and if we have only 1 ng-content , then select Attribute is not required
 

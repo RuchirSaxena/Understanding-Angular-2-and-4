@@ -6,14 +6,26 @@
   </div>
   <div class="col-md-6">
     <favorite [Fav]="post.isFavorite" (change)="onFavoriteChanged($event)"></favorite>
-    <bootstrap-panel>
+   <!--  <bootstrap-panel>
       <div class="heading">
         Heading dynamic
       </div>
       <div class="body">
         body dynamic
       </div>
-    </bootstrap-panel>
+    </bootstrap-panel> 
+  
+  Below is a better way of writing this code
+  -->
+
+    <bootstrap-panel>
+        <ng-container class="heading">
+          Heading dynamic
+        </ng-container >
+        <ng-container  class="body">
+         body dynamic
+        </ng-container >
+      </bootstrap-panel>
 
   </div>
 
