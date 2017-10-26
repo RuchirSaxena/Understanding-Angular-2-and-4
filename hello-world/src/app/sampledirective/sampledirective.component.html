@@ -33,3 +33,10 @@
 <ng-template #noCoursesPresent>
   <h1>No courses</h1>
 </ng-template>
+
+<!--
+  [hidden] =>equivalent to ng show and ng hide
+-->
+<div [hidden]="courses.length>0">
+<h1> No courses present</h1> 
+</div>

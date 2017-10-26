@@ -641,4 +641,16 @@ export class SampledirectiveComponent  {
    }
 }
 
+[hidden]
+==========
+This Directive is to to hide the element in the dom but the HTML of that element will be present in the DOM
+
+Usage ngIf and hidden
+========================
+Use *ngIf =>for large elements tree
+use [hidden] => for small element trees
+
+Note : if there is a costly operations involved in large DOM tree then use [hidden] for better performance
+
+
  Continue with section 6..... 
