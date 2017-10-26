@@ -495,5 +495,47 @@ export class AppComponent {
   }
 }
 
+So basically when we are delaing with events in case of Reusable Components then we can conceptulise this co
+
+Applying CSS to our component
+=================================
+
+@Component({
+    selector:'favorite',
+    templateUrl:'./favorite.component.html',
+    //3. Ways to apply css to our component 1.Seperate file using styleUrls
+    //2.inline style in our component using styles property and pass array of styles
+    //3.Write the style inside .html file of component using <style> tag property , though its not the recomended approach
+    //The priorty  is give to the last way whichever is defined
+   
+    styles:[
+        `
+        .glyphicon{
+            color: green;
+        }
+        `
+    ],
+    styleUrls:['./favorite.component.css'],
+In component.html
+    <!--This will override all the other css implementations-->
+<style>
+      .glyphicon{
+            color: blue;
+        }
+</style>
+
+   /* Below we have a additonal property of Angular ie. encasulation
+      This is used in context with CSS application to our component
+      Its a Enum ViewEncapsulation which has 3 values :
+      1.Emulated => Use angular mechanism of setting style of components to its native scope ie. style applied with be only used with this component 
+      2.Native => Use the built in shadow DOM feature of browser but shadow DOM is not supported in all browsers currently only supported with chaome version 57 + , safari version 10 +
+    3.None=> It will not keep the style to component scope and will leakout outside of the component resulting in global scope of app.
+
+    Note: We should use the Emulated property in todays context and whic is by default option of ViewEncapsulation
+   */
+    encapsulation: ViewEncapsulation.Emulated
+
+})
+
 
  Continue with section 5..... 
