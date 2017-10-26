@@ -555,6 +555,8 @@ In our component.html ie bootstrap-panel
   </div>
 </div>
 
+Note : Here we are using select Attribute to differenciate between 2 ng-componet and if we have only 1 ng-content , then select Attribute is not required
+
 In app.component.html =>
   <bootstrap-panel>
       <div class="heading">
