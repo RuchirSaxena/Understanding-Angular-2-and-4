@@ -64,3 +64,26 @@
       >Default View Component</div>
       
   </div>
+
+  <table class="table table-stripped">
+    <tr>
+      <th>S.NO</th>
+      <th>Name</th>
+      <th>Duration</th>
+    </tr>
+    <tr *ngFor="let course of coursesData; trackBy:trackCourse ;index as i ;even as isEvenRow"  [class.active]="isEvenRow==true">
+      <td>{{i}}</td>
+      <td>{{course.name}}</td>
+      <td>{{course.duration}}</td>
+      <td><button class="btn btn-danger" (click)="onDelete(course)">Delete</button></td>
+    </tr>
+  </table>
+<div class="from-group">
+    <label for="">Course Name:</label>
+    <input class="form-control" type="text" name="" id=""><br>
+    <label for="">Course Duration:</label>
+    <input class="form-control" type="text" name="" id=""><br>
+    <button class="btn btn-success" (click)="onAdd()">Add Courses</button>
+</div>
+  
+

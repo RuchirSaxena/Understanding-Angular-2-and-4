@@ -652,5 +652,112 @@ use [hidden] => for small element trees
 
 Note : if there is a costly operations involved in large DOM tree then use [hidden] for better performance
 
+ngSwitch
+============
+Smilar to switch case of other languages
+
+in Component.html =>
+
+<ul class="nav nav-pills">
+    <li [class.active]="viewMode=='map'">
+      <a  (click)="viewMode='map'"
+      >Map View</a>
+    </li>
+    <li [class.active]="viewMode=='list'">
+      <a  (click)="viewMode='list'"
+      >List View</a>
+    </li>
+  </ul>
+  <div [ngSwitch]="viewMode">
+      <div 
+      *ngSwitchCase="'map'"
+      >Map View Component</div>
+      <div
+      *ngSwitchCase="'list'"
+      >List View Component</div>
+      <div
+      *ngSwitchDefault
+      >Default View Component</div>
+      
+  </div>
+
+In TS Class=>
+
+export class SampledirectiveComponent  {
+  
+   viewMode:string='map';
+   
+}
+
+ngFor
+=======
+Used as for loop 
+
+<table class="table table-stripped">
+    <tr>
+      <th>S.NO</th>
+      <th>Name</th>
+      <th>Duration</th>
+    </tr>
+    <tr *ngFor="let course of coursesData; index as i ;even as isEvenRow"  [class.active]="isEvenRow==true">
+
+    OR
+    //using track by to impove performance
+     <tr *ngFor="let course of coursesData; trackBy:trackCourse ;index as i ;even as isEvenRow"  [class.active]="isEvenRow==true">
+
+
+      <td>{{i}}</td>
+      <td>{{course.name}}</td>
+      <td>{{course.duration}}</td>
+      <td><button class="btn btn-danger" (click)="onDelete(course)">Delete</button></td>
+    </tr>
+  </table>
+
+
+  export class SampledirectiveComponent  {
+   courses=[];
+   viewMode:string='map';
+   coursesCount():boolean{
+      if(this.courses.length>0){
+        return true;
+      }else{
+        return false;
+      }
+   }
+
+   coursesData=[
+     {
+       name:"Angular JS",
+       duration:"1 month"
+     },
+     {
+      name:"React JS",
+      duration:"3 month"
+     },{
+      name:"Node JS",
+      duration:"6 month"
+     }
+   ];
+   onAdd(){
+     this.coursesData.push({
+      name:"Mongo DB",
+      duration:"1 month"
+     });
+   }
+
+   onDelete(course){
+    this.coursesData.splice(course,1);
+   }
+      //USED only when we want to increace the performance of getting data from server
+   trackCourse(index,course){
+      return course?course.id:undefined;
+   }
+}
+
+Note : We can use trackby to improve pweformance if we are getting the similar type of data from server again and again
+
+* => In Directives
+=======================
+When we use the leading * ie: *ngIf ,*ngSwitch , then angular rewrites that block using ng-template
 
  Continue with section 6..... 
