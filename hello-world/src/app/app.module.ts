@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { PanelComponent } from './panel/panel.component';
 import { SampledirectiveComponent } from './sampledirective/sampledirective.component';
+import { InputFormatDirective } from './input-format.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SampledirectiveComponent } from './sampledirective/sampledirective.comp
     FavoriteComponent,
     SummaryPipe,
     PanelComponent,
-    SampledirectiveComponent
+    SampledirectiveComponent,
+    InputFormatDirective
 
   ],
   imports: [

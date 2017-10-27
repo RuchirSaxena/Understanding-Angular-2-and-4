@@ -1,3 +1,8 @@
+
+<!--Safe Travarersal options in angular-->
 <p>
-  admin works!
+  <span *ngIf="task.assignee">{{task.assignee.name}}
+  </span>
+ <!-- OR -->
+  <span >{{task.assignee?.name}}  </span>
 </p>

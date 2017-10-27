@@ -781,8 +781,96 @@ export class FavoriteComponent implements OnInit{
     }
 }
 
+ngStyle
+==========
+View 72
+
 * => In Directives
 =======================
 When we use the leading * ie: *ngIf ,*ngSwitch , then angular rewrites that block using ng-template
+
+Safe Traversal operators
+==========================
+Basically when we are dispalying data from javascript object , so there might be scenarios where this javascript object is coming from the server and possibilites are there that this object properties are null or undifined , and that will result in the error as the object property is undifined...
+To overcome this proble we should use safe Traversal operations Eg:
+
+export class AdminComponent{
+  task={
+    title:'Review applications',
+    assignee:null
+  }
+}
+In above TS CLASS assignee value is null and it will result in error if we use in string manupulation
+so below we are using safe Traversal operations where even if the value of assignee is null or undefined , then it will not result in error
+
+<!--Safe Travarersal operators in angular-->
+<p>
+  <span *ngIf="task.assignee">{{task.assignee.name}}
+  </span>
+ <!-- OR -->
+  <span >{{task.assignee?.name}}  </span>
+</p>
+
+Custom Directives
+==================\
+We can create our custom Directives in angular for implementing our specific presentation logic on DOM
+
+CLI Command
+================
+ng g d InputFormat
+
+Synatx:
+
+import { element } from 'protractor';
+import { Directive, HostListener, ElementRef, Input } from '@angular/core';
+
+@Directive({
+  selector: '[appInputFormat]'
+})
+export class InputFormatDirective {
+
+  //Used ElementRef to get the value of input feilds
+  constructor(private el:ElementRef) {
+
+  }
+
+  @Input('format') format;
+  @Input('appInputFormat') format_OtherWay;
+  //Imported host HostListener to get the events attached to DOM elements like blur , focus etc.
+  @HostListener('focus') onfocus(){
+    console.log("onFocus");
+    
+  }
+ //Created directive to make text value to lowercase or uppercase
+  @HostListener('blur') onblur(){
+    console.log("onblur");
+    let value:string =this.el.nativeElement.value;
+    if(this.format=="lowercase")
+    this.el.nativeElement.value=value.toLocaleLowerCase();
+    else
+    this.el.nativeElement.value=value.toUpperCase();
+
+    if(this.format_OtherWay=="lowercase")
+    this.el.nativeElement.value=value.toLocaleLowerCase();
+    else
+    this.el.nativeElement.value=value.toUpperCase();
+    
+  }
+}
+
+//In app.component.html
+   
+   <input type="text" name="" id="" appInputFormat [format]="'uppercase'">
+
+<!--
+    OR below way
+-->
+
+<input type="text" name="" id="" [appInputFormat]="'lowercase'">
+
+
+
+
+
 
  Continue with section 6..... 
