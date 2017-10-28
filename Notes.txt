@@ -1,6 +1,6 @@
 
 NPM Commands
-=================
+==================
 
 npm install -g @angular/cli  =>Install Angular CLI globally
 ng --version => For checking the installed CLI Version
