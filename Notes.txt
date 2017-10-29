@@ -1155,6 +1155,7 @@ AbstractContol => Its a base class for FromControl and FromGroup ie. contains th
     </div>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
+Now , We create above HTML from using Reactive form ie. Create above form through code
 
 //Reactive From
 <form [formGroup]="form">
@@ -1232,9 +1233,9 @@ in TS=>?
     password:new FormControl('',Validators.required)
   });    
 
+For Futher knowlege on Froms see section 8 ==custom Validators, aync ops , asyn Validators etc...
 
-Now , We create above HTML from using Reactive form ie. Create above form through code
 
  
 
- Continue with section 6..... 
+ Continue with section 9..... 
