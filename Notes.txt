@@ -869,8 +869,264 @@ export class InputFormatDirective {
 <input type="text" name="" id="" [appInputFormat]="'lowercase'">
 
 
+Forms In Angular
+=================
+In angualr we have a class called FormControl for each control in a from which have below classes =>
+1.value
+2.toched
+3.untoched
+4.dirty =>value is changed or not
+5.pritine =>Value is not changed
+6.valid =>wheather value is valid or not
+7.error =>If not valid , then what are the error messages
+
+Similar to FromControl we have FromGroup which have classes for whole form ie: multiple controls are in one FromGroup and we can have multiple FromGroup in a coplex form Eg:Payment Details , Shipping Details etc.
+1.value
+2.toched
+3.untoched
+4.dirty =>value is changed or not
+5.pritine =>Value is not changed
+6.valid =>wheather value is valid or not
+7.error =>If not valid , then what are the error messages
+
+There are 2 ways to create these control objects :
+1.Using Directive :called as Tempalte Directive Froms writing our own html code
+2.Using Html code() :called as Reactive forms earlir called as model driven from
+
+Why 2 ways"
+Reactive :
+1.More Control over validation logic
+2.Good for complex Forms
+3.Ubit Testable
+
+Tempalte driven
+1.Good for simple form
+2.simple validation
+3.Easier to create
+4.Less code
+
+Implemting Template driven From:
+We need 2 properties for it.
+1.ngModel
+2.name="firstName"
+
+Eg: 
+ <div class="form-group">
+    <label for="firstName">FirstName :</label>
+    <input ngModel name="firstName" type="text" (change)="log(firstName)" #firstName="ngModel" id="firstName" class="form-control">
+  </div>
+
+
+validation For above control
+================================
+<div class="form-group">
+    <label for="firstName">FirstName :</label>
+    <input ngModel required name="firstName" type="text" (change)="log(firstName)" #firstName="ngModel"  id="firstName" class="form-control">
+    <div *ngIf="firstName.touched && !firstName.valid" class="alert alert-danger">
+      First Name is required
+    </div>
+  </div>
+
+  Above used (change) , #firstName to pass this control to log() method ie:(change)="log(firstName)"  , next usid div for validation and placed the required message and this div will appear conditionally , Below is extended example and implementing multiple validation messages
+
+   <div class="form-group">
+    <label for="firstName">FirstName :</label>
+    <input ngModel required name="firstName" type="text" (change)="log(firstName)" #firstName="ngModel" minlength="3" maxlength="10" pattern="angular"  id="firstName" class="form-control">
+    <div *ngIf="firstName.touched && !firstName.valid" class="alert alert-danger">
+     <div *ngIf="firstName.errors.required">First Name is required</div>
+     <!--Below Using strind Interpolation for showing error messages dynamically-->
+     <div *ngIf="firstName.errors.minlength">Min Length is {{firstName.errors.minlength.requiredLength}}</div>
+     <div *ngIf="firstName.errors.maxlength">Max Length is 10</div>
+     <div *ngIf="firstName.errors.pattern">pattern Does not match</div>
+    </div>
+  </div>
+
+  Or Above code in cleaner way
+
+   <div class="form-group">
+    <label for="firstName">FirstName :</label>
+    <input 
+    required 
+    minlength="3" 
+    maxlength="10" 
+    pattern="angular"  
+    ngModel 
+    #firstName="ngModel" 
+    (change)="log(firstName)"
+    name="firstName" 
+    type="text" 
+    id="firstName" 
+    class="form-control">
+    <div 
+    *ngIf="firstName.touched && !firstName.valid"
+     class="alert alert-danger">
+     <div 
+     *ngIf="firstName.errors.required">First Name is required</div>
+     <div
+      *ngIf="firstName.errors.minlength">Min Length is {{firstName.errors.minlength.requiredLength}}</div>
+     <div 
+     *ngIf="firstName.errors.maxlength">Max Length is 10</div>
+     <div 
+     *ngIf="firstName.errors.pattern">pattern Does not match</div>
+    </div>
+  </div>
+
+  Futher we can style our controls by Adding additonal styles as angular has certain class attached to the controls depending upon its validation ie:.form-control.ng-invalid.ng-touched etc. and we can write our custom CSS on those classes
+  example:
+  //In component.css
+  form-control.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
+
+ngFrom 
+=========
+<form #from="ngForm" (ngSubmit)="submmit(from)">
+<!--
+controls below
+-->
+
+ <textarea class="form-control" name="comment"
+  ngModel 
+  id="comment"
+  cols="30" rows="10"></textarea>
+</form>
+
+Note : To have control value on submit button we need to have 2 properties on control
+1.name="firstName"
+2.ngModel 
+
+For ngModelGroup for complex forms => sec 6 =>vd 85 for more info
+======================================
+  <div ngModelGroup="contact">
+      <div class="form-group">
+          <label for="firstName">FirstName :</label>
+          <input 
+          required 
+          minlength="3" 
+          maxlength="10" 
+          pattern="angular"  
+          ngModel 
+          #firstName="ngModel" 
+          (change)="log(firstName)"
+          name="firstName" 
+          type="text" 
+          id="firstName" 
+          class="form-control">
+          <div 
+          *ngIf="firstName.touched && !firstName.valid"
+           class="alert alert-danger">
+           <div 
+           *ngIf="firstName.errors.required">First Name is required</div>
+           <div
+            *ngIf="firstName.errors.minlength">Min Length is {{firstName.errors.minlength.requiredLength}}</div>
+           <div 
+           *ngIf="firstName.errors.maxlength">Max Length is 10</div>
+           <div 
+           *ngIf="firstName.errors.pattern">pattern Does not match</div>
+          </div>
+        </div>
+
+  </div>
+
+  like above we can create multiple groups in one from 
+
+diabling button if fromis not valid
+=====================================
+<form #form="ngForm" (ngSubmit)="submmit(form)">
+<!--
+Controls
+-->
+</form>
+
+<button 
+  [disabled]="!form.valid"
+  class="btn btn-primary">Submmit</button>
+
+CheckBox
+=============
+ <div class="checkbox">
+      <label>
+        <input type="checkbox" ngModel name="isSubscribed">Subscribe To Mailing List
+      </label>
+  </div>
+
+DropDown
+============
+ <div class="form-group">
+    <label for="contactMethod">Contact Method</label>
+    <select name="" id="contactMethod" ngModel name="contactMethod" class="form-control">
+      <option value="">select</option>
+      <option *ngFor="let contactMethod of contactMethods"  [value]="contactMethod.id">{{contactMethod.name}}</option>
+    </select>
+  </div>
+
+  Note: [ngValue]="contactMethod" is used to get key/value pair of ddl 
+  Also we can use multiple attr to select multiple values from DDL , it will make DDL to ListBox
+
+
+In TS Class
+export class ContactFormComponent  {
+
+  contactMethods= [{
+    id:1,
+    name:"Phone"
+  },
+  {
+    id:2,
+    name:"Email"
+  },
+  {
+    id: 3,
+    name:"Mobile No"
+  }
+];
+
+}
+Radio Buttons
+==============
+HArd code =>
+
+  <div class="radio">
+    <label>
+    <input ngModel type="radio" name="customerType" value="1">
+    Gold
+  </label>
+</div>
+<div class="radio">
+    <label>
+        <input ngModel type="radio" name="customerType" value="2">
+        Silver
+    </label>
+</div>
+
+Dynamic Bind=>
+  <div class="radio" *ngFor="let memberType of memberTypes">
+    <label>
+    <input ngModel type="radio" name="customerType" [value]="memberType.id">
+    {{memberType.name}}
+  </label>
+</div>
+
+In TS Class
+=============
+export class ContactFormComponent  {
+memberTypes= [{
+  id:1,
+  name:"Gold"
+},
+{
+  id:2,
+  name:"Silver"
+},
+{
+  id: 3,
+  name:"Other"
+}
+];
+}
 
 
 
+  {{form.value |json}}  
 
  Continue with section 6..... 

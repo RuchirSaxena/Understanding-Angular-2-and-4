@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
 import { PanelComponent } from './panel/panel.component';
 import { SampledirectiveComponent } from './sampledirective/sampledirective.component';
 import { InputFormatDirective } from './input-format.directive';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InputFormatDirective } from './input-format.directive';
     SummaryPipe,
     PanelComponent,
     SampledirectiveComponent,
-    InputFormatDirective
+    InputFormatDirective,
+    ContactFormComponent
 
   ],
   imports: [
