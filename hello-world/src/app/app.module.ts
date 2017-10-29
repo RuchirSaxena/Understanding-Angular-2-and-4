@@ -1,9 +1,11 @@
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { SignupFormComponent } from './Sign-Up Reactive From/signup-form.component';
 import { FavoriteComponent } from './ReusableComponent/favorite.component';
 import { SummaryPipe } from './summary.pipe';
 import { CoursesService } from './courses.service';
 import {CoursesComponent} from "./courses/courses.component"
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -11,7 +13,8 @@ import { AdminComponent } from './admin/admin.component';
 import { PanelComponent } from './panel/panel.component';
 import { SampledirectiveComponent } from './sampledirective/sampledirective.component';
 import { InputFormatDirective } from './input-format.directive';
-import { ContactFormComponent } from './contact-form/contact-form.component';
+import { ContactFormComponent } from './contact-form-Template Driven/contact-form.component';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     CoursesComponent,
     AdminComponent,
     FavoriteComponent,
+    SignupFormComponent,
     SummaryPipe,
     PanelComponent,
     SampledirectiveComponent,
@@ -28,11 +32,14 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     //Implemting DI 
     CoursesService
+   
+
   ],
   bootstrap: [AppComponent]
 })

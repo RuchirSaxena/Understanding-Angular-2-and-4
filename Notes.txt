@@ -1125,8 +1125,116 @@ memberTypes= [{
 ];
 }
 
+Getting From values on HTML for testing purpose
+==================================================
+Below code will help us to get data from different HTML controls of Froms:
+
+  {{form.value |json}} 
+
+Reactive Froms
+================
+Creating Froms through CODE , instead of HTML markup used in template driven from
+
+AbstractContol => Its a base class for FromControl and FromGroup ie. contains the common proerties of FromControl and FromGroup =>Inheritance concept
+//Basic HTML of Form
+
+<form>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+            id="username" 
+            type="text" 
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+            id="password" 
+            type="text" 
+            class="form-control">
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+
+//Reactive From
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+            formControlName="username"
+            id="username" 
+            type="text" 
+            class="form-control">
+        <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">
+            Username is required.
+        </div>    
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+            formControlName="password"
+            id="password" 
+            type="text" 
+            class="form-control">
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+
+in TS Class=> Also import in app.module.ts =>
+ import { FormsModule,ReactiveFormsModule } from '@angular/forms'
+
+  imports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
+
+import { Component } from '@angular/core';
+import { FormGroup, FormControl,Validators } from '@angular/forms';
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+  form=new FormGroup({
+    username:new FormControl('',Validators.required),
+    password:new FormControl('',Validators.required)
+  });
+
+  //Further we can create below property to acess from properties in component.html
+  get Username(){
+    return this.form.username;
+  }
+
+}
+
+Another example
+==================
+<div *ngIf="Username.touched && Username.invalid" >
+                <div *ngIf="Username.errors.required" class="alert alert-danger">
+                        Username is required.
+                </div> 
+                <div *ngIf="Username.errors.minlength" class="alert alert-danger">
+                        min length is 3
+                </div> 
+               
+        </div>   
+             
+    </div>
+in TS=>?
+
+ form=new FormGroup({
+    username:new FormControl('',[
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(10)
+    ]),
+    password:new FormControl('',Validators.required)
+  });    
 
 
-  {{form.value |json}}  
+Now , We create above HTML from using Reactive form ie. Create above form through code
+
+ 
 
  Continue with section 6..... 
