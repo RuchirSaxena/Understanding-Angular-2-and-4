@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { SignupFormComponent } from './Sign-Up Reactive From/signup-form.component';
 import { FavoriteComponent } from './ReusableComponent/favorite.component';
@@ -14,6 +15,7 @@ import { PanelComponent } from './panel/panel.component';
 import { SampledirectiveComponent } from './sampledirective/sampledirective.component';
 import { InputFormatDirective } from './input-format.directive';
 import { ContactFormComponent } from './contact-form-Template Driven/contact-form.component';
+import { PostComponent } from './http/http.component';
 
 
 @NgModule({
@@ -27,16 +29,19 @@ import { ContactFormComponent } from './contact-form-Template Driven/contact-for
     PanelComponent,
     SampledirectiveComponent,
     InputFormatDirective,
-    ContactFormComponent
+    ContactFormComponent,
+    PostComponent
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
+    
   ],
   providers: [
-    //Implemting DI 
+    //For Implemting DI we need to add it to provide to use it in our component    
     CoursesService
    
 

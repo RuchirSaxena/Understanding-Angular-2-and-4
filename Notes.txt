@@ -1235,7 +1235,131 @@ in TS=>?
 
 For Futher knowlege on Froms see section 8 ==custom Validators, aync ops , asyn Validators etc...
 
+HTTP Module for interactig with server
+======================================
+Angular uses HTTP Module to intreact with server
+it has diff. methods like get ,post , put ,Delete 
 
- 
+To get it working we need to import HTTP module to app.module.ts
+imports: [
+    HttpModule
+  ],
+
+in component.ts
+===================  
+ import { Http } from '@angular/http';
+import * as http from 'http';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'posts',
+  templateUrl: './http.component.html',
+  styleUrls: ['./http.component.css']
+})
+export class PostComponent {
+    posts:any[];
+    private url:string="https://jsonplaceholder.typicode.com/posts";
+   
+    constructor(private http:Http){
+      http.get(this.url)
+      .subscribe(response=>{
+        console.log(response);
+        this.posts=response.json();
+      });
+    }
+
+   // We should not be calling http service in constructor
+   //We should be using OnInit() to call it
+    ngOnInit(): void {
+    this.http.get(this.url)
+    .subscribe(response=>{
+      console.log(response);
+      this.posts=response.json();
+    });
+  }
+
+    createPost(input:HTMLInputElement){
+        let post={
+          title:input.value
+        };
+        input.value="";
+       this.http.post(this.url,JSON.stringify(post))
+       .subscribe(Response=>{
+        post['id']=Response.json().id;
+        console.log(Response.json());
+        //To add the post on Starting position 
+        //otherwise push method will add it to the last position
+        this.posts.splice(0,0,post);
+       });
+      }
+      
+      updatePost(post){
+        alert("in");
+        //Below we are using patch method of HTTp insted of PUT ,
+        //Patch helps us in updating the items partially ie: getting performance benefit
+        //BUT out REST API should support patch verb/method
+
+        //this.http.put(this.url,JSON.stringify(post));
+        //OR
+        this.http.patch(this.url+'/'+post.id,JSON.stringify({isRead:true}))
+        .subscribe(response=>{
+          console.log(response.json());
+        });
+      }
+
+      deketePost(post){
+        this.http.delete(this.url+'/'+post.id)
+        .subscribe(response=>{
+          console.log(response.json());
+          let index=this.posts.indexOf(post);
+          this.posts.splice(index,1);
+        });
+      }
+}
+
+
+
+
+In component.html
+======================
+<input type="text" class="form-control" name="" #title (keyup.enter)="createPost(title)"  id="">
+
+<input type="text" class="form-control" name="" #title (keyup.enter)="createPost(title)"  id="">
+
+<ul class="list-group">
+  <li
+   *ngFor="let post of posts"
+  class="list-group-item">
+  <button class="btn btn-primary pull-right"
+  (click)="updatePost(post)"
+  >Update</button>
+  {{ post.title }}
+  <button class="btn btn-primary pull-left"
+  (click)="deketePost(post)"
+  >Delete</button>
+</li>
+</ul>
+
+NOTE : We should not write our http server intrecton in our components as it voilates the SOC(seperation of concern principle) also S of SOLID ,also this data fectching of pairticular data may be required in multiple place which results in duplicating our logic to multiple places , so we should move this logic to a service and then inject it to our component using Dependency injection.
+
+Lifecycle Hooks in Angular =>Component Lifecycle
+=================================================
+These are the Hooks called at different stages of component
+
+1.Creates a Component
+2.Renders it
+3.Creates and Renders its children
+4.Destroy a component
+
+Methods =>
+============
+Interface OnInit implements =>ngOnInit
+OnChanges
+DoCheck
+AfterContentInit
+
+
+
+
 
  Continue with section 9..... 
