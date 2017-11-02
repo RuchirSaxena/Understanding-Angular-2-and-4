@@ -1359,6 +1359,105 @@ DoCheck
 AfterContentInit
 
 
+****************************Routing***********************
+Routing
+===========
+Basically Routing is used to change the URL path ie. when we are working in a SPA , only the content of web pages changes and not the whole web pages is loaded.
+
+Setting up Routing:
+=======================
+We need to use app.module.ts to write our Routing Logic
+
+We will create a const holding the information about the paths and its related component
+
+Step 1: Import below modules
+import { RouterModule, Routes } from '@angular/router';
+
+Step 2: Create Routes
+const appRoutes:Routes=[
+  {
+    path:'',
+    component:HomeComponent
+  },
+  {
+    path:'users',
+    component:UserComponent,
+  },
+  {
+    path:'servers',
+    component:ServerComponent
+  }
+];
+
+step3: Register the Imported module also assign the appRoutes const to 
+imports: [
+    RouterModule.forRoot(appRoutes)
+  ]
+
+Step 4: Use below tag to load Route content  
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <ul class="nav nav-tabs">
+        <!--Below Used Router Link , 
+                so that the whole page is not refreshed and angular kicks in and load only changed HTML
+                Seccondly using routerLinkActive directive to set the active class of bootstrap on active link
+                Thirdly we used [routerLinkActiveOptions]="{ exact:true } so that the default path is not always 
+                selected even when other tabs are selected ie:Our Home link is always active even when we click other links 
+             -->
+        <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact:true }">
+          <a routerLink="/">Home</a>
+        </li>
+        <li role="presentation" routerLinkActive="active">
+          <a routerLink="/servers">Servers</a>
+        </li>
+        <li role="presentation" routerLinkActive="active">
+          <a routerLink="/users">Users</a>
+        </li>
+      </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <router-outlet></router-outlet> <!--Used it to load the content of different pages -->
+      </div>
+    </div>
+   
+  </div> 
+
+  Dynamically Loading Routes
+  ==========================
+Above Code remains same 
+
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  constructor(private router:Router) { }
+
+  ngOnInit() {
+  }
+
+  onLoadServers(){
+    //complex calculations code here and do navigation below
+    this.router.navigate(['/servers']);
+   // or
+      this.router.navigate(['/servers'],
+      //Below CODE to set to relative path , otherwise it will be absolute
+      {relativeTo:this.route});
+
+  }
+
+}
+
+
+
 
 
 

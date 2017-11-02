@@ -1,3 +1,10 @@
+import * as path from 'path';
+import { RouterModule, Routes } from '@angular/router';
+import { ServersService } from './servers/servers.service';
+import { EditServerComponent } from './servers/edit-server/edit-server.component';
+import { UserComponent } from './users/user/user.component';
+import { ServerComponent } from './servers/server/server.component';
+import { HomeComponent } from './home/home.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { SignupFormComponent } from './Sign-Up Reactive From/signup-form.component';
@@ -17,6 +24,27 @@ import { InputFormatDirective } from './input-format.directive';
 import { ContactFormComponent } from './contact-form-Template Driven/contact-form.component';
 import { PostComponent } from './http/http.component';
 
+import { ServersComponent } from './servers/servers.component';
+import { UsersComponent } from './users/users.component';
+
+const appRoutes:Routes=[
+  {
+    path:'',
+    component:HomeComponent
+  },
+  {
+    path:'users',
+    component:UsersComponent,
+  },
+  {
+    path:'users/:id',
+    component:UserComponent
+  },
+  {
+    path:'servers',
+    component:ServerComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -30,21 +58,27 @@ import { PostComponent } from './http/http.component';
     SampledirectiveComponent,
     InputFormatDirective,
     ContactFormComponent,
-    PostComponent
+    PostComponent,
+    HomeComponent,
+    UsersComponent,
+    ServersComponent,
+    UserComponent,
+    EditServerComponent,
+    ServerComponent
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
     
   ],
   providers: [
     //For Implemting DI we need to add it to provide to use it in our component    
-    CoursesService
-   
-
+    CoursesService,
+    ServersService
   ],
   bootstrap: [AppComponent]
 })
