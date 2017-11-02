@@ -1456,6 +1456,46 @@ export class HomeComponent implements OnInit {
 
 }
 
+Another Complex example
+In module.ts
+
+onst appRoutes:Routes=[
+  {
+    path:'',
+    component:HomeComponent
+  },
+  {
+    path:'users',
+    component:UsersComponent,
+  },
+  {
+    path:'users/:id/:name',
+    component:UserComponent
+  },
+  {
+    path:'servers',
+    component:ServerComponent
+  }
+];
+
+
+//In TS Code4 
+export class UserComponent implements OnInit {
+  user: {id: number, name: string};
+
+  constructor(private route:ActivatedRoute) { }
+
+  ngOnInit() {
+    this.user={
+      id:this.route.snapshot.params['id'],
+      name:this.route.snapshot.params['name']
+    }
+  }
+
+//In Component.html
+<p>User with ID _ID = {{user.id}}</p>
+<p>User name is _NAME = {{user.name}}</p>
+
 
 
 

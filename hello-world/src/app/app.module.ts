@@ -37,7 +37,7 @@ const appRoutes:Routes=[
     component:UsersComponent,
   },
   {
-    path:'users/:id',
+    path:'users/:id/:name',
     component:UserComponent
   },
   {
